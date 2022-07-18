@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { axiosGet } from '../api';
+import { axiosGetMissions } from '../api';
 
 const FETCH = 'space-travelers/missions/FETCH';
-const urlMissions = 'https://api.spacexdata.com/v3/missions';
 const initialState = {
   loading: false,
 };
@@ -19,7 +18,7 @@ const missionsReducer = (state = [], action = {}) => {
 export const fetchMissions = createAsyncThunk(
   FETCH,
   async (_, { dispatch }) => {
-    const res = await axiosGet(urlMissions)
+    const res = await axiosGetMissions()
       .then(
         (data) => dispatch({
           type: FETCH,
