@@ -13,11 +13,6 @@ const Missions = () => {
 
   return (
     <Container>
-      {/* {missionsData.map((data) => (
-        <li key={data.mission_id}>
-          {data.mission_name}
-        </li>
-      ))} */}
       <Row>
         <Col>
           <Table striped bordered hover>
