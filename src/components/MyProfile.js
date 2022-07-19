@@ -8,10 +8,25 @@ const MyProfile = () => {
   const missionsData = useSelector((state) => state.missionsReducer);
 
   return (
-    <Container>
+    <Container className='mt-4'>
       <Row>
         <Col>
           <h4>My Missions</h4>
+          <ListGroup>
+            {
+              missionsData.length > 0 &&
+              missionsData.map((mission) => {
+                if (mission.reserved) {
+                  return ( 
+                    <ListGroup.Item>
+                      mission.name
+                    </ListGroup.Item>
+                  )
+                }
+                return null;
+              })
+            }
+          </ListGroup>
         </Col>
         <Col>
           <h4>My Rockets</h4>
