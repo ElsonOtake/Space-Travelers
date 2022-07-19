@@ -7,15 +7,20 @@ import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
-import { joinMission } from '../redux/missions/Missions';
+import { joinMission, leaveMission } from '../redux/missions/Missions';
 
 const Missions = () => {
   const missionsData = useSelector((state) => state.missionsReducer);
   const dispatch = useDispatch();
 
-  const handleClick = (e) => {
+  const handleJoinClick = (e) => {
     const id = e.target.classList[0].substr(4);
     dispatch(joinMission(id));
+  }
+
+  const handleLeaveClick = (e) => {
+    const id = e.target.classList[0].substr(4);
+    dispatch(leaveMission(id));
   }
 
   useEffect(() => {
@@ -74,7 +79,7 @@ const Missions = () => {
                             <Button variant="outline-secondary" className={`btn-${mission.id}`}
                               onClick={
                                 (e) => {
-                                  handleClick(e)
+                                  handleJoinClick(e)
                                 }
                               }
                             >
@@ -85,7 +90,7 @@ const Missions = () => {
                             <Button variant="outline-danger" className={`btn-${mission.id}`}
                               onClick={
                                 (e) => {
-                                  handleClick(e)
+                                  handleLeaveClick(e)
                                 }
                               }
                             >
