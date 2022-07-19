@@ -27,7 +27,7 @@ const Header = () => (
       >
         My Profile
       </NavLink>
-    </ul> 
+    </ul>
   </nav>
 );
 

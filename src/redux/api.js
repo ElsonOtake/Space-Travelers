@@ -15,7 +15,7 @@ const filterMissions = (missions) => {
   return response;
 };
 
-export const axiosGetMissions = async () => {
+const axiosGetMissions = async () => {
   try {
     const response = await axios.get(urlMissions);
     return filterMissions(response.data);
@@ -23,3 +23,5 @@ export const axiosGetMissions = async () => {
     throw new Error(error);
   }
 };
+
+export default axiosGetMissions;
