@@ -24,11 +24,11 @@ const Missions = () => {
   }
 
   useEffect(() => {
-    (missionsData.length === 0) && dispatch(fetchMissions());
+    missionsData.length === 0 && dispatch(fetchMissions());
   }, [missionsData.length]);
 
   return (
-    <Container>
+    <Container className='mt-4'>
       <Row>
         <Col>
           <Table striped bordered hover size="sm">
