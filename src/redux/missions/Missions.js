@@ -3,6 +3,7 @@ import { axiosGetMissions } from '../api';
 
 const FETCH = 'space-travelers/missions/FETCH';
 const JOIN_MISSION = 'space-travelers/missions/JOIN_MISSION';
+const LEAVE_MISSION = 'space-travelers/missions/LEAVE_MISSION';
 const initialState = {
   loading: false,
 };
@@ -13,6 +14,8 @@ const missionsReducer = (state = [], action = {}) => {
       return action.payload;
     case JOIN_MISSION:
       return state.map(mission => mission.id !== action.id ? mission : { ...mission, reserved: true });
+    case LEAVE_MISSION:
+      return state.map(mission => mission.id !== action.id ? mission : { ...mission, reserved: false });
     default:
       return state;
   }
@@ -34,6 +37,11 @@ export const fetchMissions = createAsyncThunk(
 
 export const joinMission = (id) => ({
   type: JOIN_MISSION,
+  id,
+});
+
+export const leaveMission = (id) => ({
+  type: LEAVE_MISSION,
   id,
 });
 
