@@ -6,7 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { Badge } from 'react-bootstrap';
+import Badge from 'react-bootstrap/Badge';
+import { joinMission } from '../redux/missions/Missions';
 
 const Missions = () => {
   const missionsData = useSelector((state) => state.missionsReducer);
@@ -31,7 +32,7 @@ const Missions = () => {
       badge.classList.remove("bg-info");
       badge.classList.add("bg-secondary");
     }
-
+    dispatch(joinMission(id));
   }
 
   useEffect(() => {
