@@ -19,7 +19,7 @@ const MyProfile = () => {
                 if (mission.reserved) {
                   return ( 
                     <ListGroup.Item>
-                      mission.name
+                      {mission.name}
                     </ListGroup.Item>
                   )
                 }
