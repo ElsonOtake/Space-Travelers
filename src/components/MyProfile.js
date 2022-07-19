@@ -16,9 +16,9 @@ const MyProfile = () => {
             {
               missionsData.length > 0
               && missionsData.filter((mission) => mission.reserved).map((res) => (
-                  <ListGroup.Item>
-                    {res.name}
-                  </ListGroup.Item>
+                <ListGroup.Item key={res.id}>
+                  {res.name}
+                </ListGroup.Item>
               ))
             }
           </ListGroup>
