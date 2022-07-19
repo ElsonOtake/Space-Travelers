@@ -32,36 +32,35 @@ const Missions = () => {
             <tbody>
               {
                 missionsData.length > 0 &&
-                missionsData.map((data) => {
+                missionsData.map((mission) => {
                   return (
-                    <tr key={data.mission_id}>
+                    <tr key={mission.id}>
                       <td
                         className="fw-bold">{
-                          data.mission_name
+                          mission.name
                         }
                       </td>
                       <td
                         className="small"
                       >
                         <small>{
-                          data.description
+                          mission.description
                         }
                         </small>
                       </td>
                       <td className="align-middle">
                         <div className="d-flex justify-content-center">
-                          <Badge className="text-uppercase" bg="secondary">
-                            <small>not a member</small>
+                          <Badge bg="secondary">
+                            <small>NOT A MEMBER</small>
                           </Badge>
                         </div>
                       </td>
                       <td className="align-middle">
                         <div className="d-flex justify-content-center">
-                          <Button variant="outline-secondary" className="text-capitalize">
-                            <small>join mission</small>
+                          <Button variant="outline-secondary" className={mission.id}>
+                            <small>Join Mission</small>
                           </Button>
                         </div>
-                        
                       </td>
                     </tr>
                   )
