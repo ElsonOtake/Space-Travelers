@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
 import missionsReducer from "./missions/Missions";
+import { missionsSliceReducer } from './missions/Missions';
 
 const rootReducer = combineReducers({
   missionsReducer,
+  missionsSliceReducer,
 });
 
 const store = configureStore({
