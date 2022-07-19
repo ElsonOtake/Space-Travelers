@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMissions } from '../redux/missions/Missions';
-import { Container, Row, Col, Table } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 const Missions = () => {
   const missionsData = useSelector((state) => state.missionsReducer);
@@ -32,8 +36,8 @@ const Missions = () => {
                     <tr key={data.mission_id}>
                       <td>{data.mission_name}</td>
                       <td>{data.description}</td>
-                      <td></td>
-                      <td></td>
+                      <td><Button variant="secondary">NOT A MEMBER</Button></td>
+                      <td><Button variant="outline-secondary">Join Mission</Button></td>
                     </tr>
                   )
                 })
