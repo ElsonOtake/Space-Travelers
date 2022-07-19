@@ -2,27 +2,34 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'react-bootstrap/Image';
 
 const Header = () => (
-  <Navbar bg="light" variant="light">
+  <Navbar variant="primary">
     <Container>
-      <Navbar.Brand href="/">Space Travelers' Hub</Navbar.Brand>
+      <Navbar.Brand
+        href="/"
+        className="fs-2"
+      >
+        Space Travelers' Hub
+      </Navbar.Brand>
       <Nav>
-        <Nav.Link 
+        <Nav.Link
           href="/"
-          className={({ isActive }) => (isActive ? 'active' : 'notActive')}
+          active
         >
           Rockets
         </Nav.Link>
         <Nav.Link 
           href="/missions"
-          className={({ isActive }) => (isActive ? 'active' : 'notActive')}
         >
           Missions
         </Nav.Link>
+        <Nav.Link >
+          |
+        </Nav.Link>
         <Nav.Link 
           href="/my_profile"
-          className={({ isActive }) => (isActive ? 'active' : 'notActive')}
         >
           My Profile
         </Nav.Link>
