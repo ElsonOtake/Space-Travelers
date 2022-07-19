@@ -15,16 +15,11 @@ const MyProfile = () => {
           <ListGroup>
             {
               missionsData.length > 0
-              && missionsData.map((mission) => {
-                if (mission.reserved) {
-                  return (
-                    <ListGroup.Item>
-                      {mission.name}
-                    </ListGroup.Item>
-                  );
-                }
-                return null;
-              })
+              && missionsData.filter((mission) => mission.reserved).map((res) => (
+                  <ListGroup.Item>
+                    {res.name}
+                  </ListGroup.Item>
+              ))
             }
           </ListGroup>
         </Col>
