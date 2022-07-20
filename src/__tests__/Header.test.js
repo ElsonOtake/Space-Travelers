@@ -19,6 +19,14 @@ describe('Tests for the Header component', () => {
     expect(screen.getByText('Missions')).toBeTruthy();
     expect(screen.getByText('My Profile')).toBeTruthy();
 
+    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    
+    expect(screen.getAllByRole('link').length).toBe(3);
+
+    expect(screen.getByAltText('planet logo')).toBeTruthy();
+
   });
   test('Checks for the Snapshot', () => {
     expect(screen.debug()).toMatchSnapshot();
