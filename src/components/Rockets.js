@@ -1,6 +1,7 @@
 import  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../redux/rockets/Rockets';
+import Rocket from './Rocket';
 
 const Rockets = () => {
   // Get rockets data from reducer
@@ -15,6 +16,21 @@ const Rockets = () => {
     }
   }, [data.length, dispatch]);
 
+  // Map the rockets array to return a Rocket component
+  // Send values as props
+  return (
+    <>
+    <p>working</p>
+      {data.map((i) => <Rocket 
+        id={i.id}
+        name={i.name}
+        description={i.description}
+        image={i.image}
+        key={i.id}
+        />
+      )}
+    </>
+  )
 
 };
 

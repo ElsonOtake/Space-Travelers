@@ -13,6 +13,9 @@ const rocketsReducer = (state = initialState, action) => {
   }
 };
 
+// Consume API and get rockets data
+// Create an array with specific information gotted from the API
+// Dispatch the new array to the rockets reducer
 const getList = () => async (dispatch) => {
   const response = await axios.get('https://api.spacexdata.com/v3/rockets');
   const newArray = response.data.map((info) => {
