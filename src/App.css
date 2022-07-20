@@ -2,6 +2,6 @@ a {
   text-decoration: none;
 }
 
-a.active {
-  text-decoration: underline;
+.fs-2 {
+  color: black;
 }
