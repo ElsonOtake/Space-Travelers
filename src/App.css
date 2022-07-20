@@ -2,6 +2,41 @@ a {
   text-decoration: none;
 }
 
+a.active {
+  text-decoration: underline;
+}
+
 .fs-2 {
   color: black;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
+nav div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 5rem;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-right: 5rem;
+}
+
+nav a:last-child {
+  border-left: 0.1rem solid gray;
+  padding-left: 2rem;
+}
+
+nav img {
+  width: 3rem;
+  height: auto;
 }

@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import missionsReducer from "./missions/Missions";
-import { missionsSliceReducer } from './missions/Missions';
+import missionsReducer, { missionsSliceReducer } from './missions/Missions';
 
 const rootReducer = combineReducers({
   missionsReducer,

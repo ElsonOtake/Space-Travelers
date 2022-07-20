@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { axiosGetMissions } from '../api';
+import axiosGetMissions from '../api';
 
 const FETCH = 'space-travelers/missions/FETCH';
 const JOIN_MISSION = 'space-travelers/missions/JOIN_MISSION';
@@ -13,9 +13,11 @@ const missionsReducer = (state = [], action = {}) => {
     case FETCH:
       return action.payload;
     case JOIN_MISSION:
-      return state.map(mission => mission.id !== action.id ? mission : { ...mission, reserved: true });
+      return state.map((mission) => (mission.id !== action.id
+        ? mission : { ...mission, reserved: true }));
     case LEAVE_MISSION:
-      return state.map(mission => mission.id !== action.id ? mission : { ...mission, reserved: false });
+      return state.map((mission) => (mission.id !== action.id
+        ? mission : { ...mission, reserved: false }));
     default:
       return state;
   }

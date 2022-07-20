@@ -1,40 +1,34 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
+import { NavLink } from 'react-router-dom';
+import logo from '../images/planet.png';
 
 const Header = () => (
-  <Navbar variant="primary">
-    <Container>
-      <Navbar.Brand
-        href="/"
-        className="fs-2"
+  <nav>
+    <div>
+      <img src={logo} alt="planet logo" />
+      <h2>Space Travelers&apos; Hub</h2>
+    </div>
+    <ul className="nav">
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? 'active' : 'notActive')}
       >
-        Space Travelers' Hub
-      </Navbar.Brand>
-      <Nav>
-        <Nav.Link
-          href="/"
-          active
-        >
-          Rockets
-        </Nav.Link>
-        <Nav.Link 
-          href="/missions"
-        >
-          Missions
-        </Nav.Link>
-        <Nav.Link >
-          |
-        </Nav.Link>
-        <Nav.Link 
-          href="/my_profile"
-        >
-          My Profile
-        </Nav.Link>
-      </Nav>
-    </Container>
-  </Navbar>
+        Rockets
+      </NavLink>
+      <NavLink
+        to="/missions"
+        className={({ isActive }) => (isActive ? 'active' : 'notActive')}
+      >
+        Missions
+      </NavLink>
+      <NavLink
+        to="/my_profile"
+        className={({ isActive }) => (isActive ? 'active' : 'notActive')}
+      >
+        My Profile
+      </NavLink>
+    </ul>
+  </nav>
 );
 
 export default Header;
