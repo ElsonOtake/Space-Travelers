@@ -51,6 +51,19 @@
   padding: 9px;
 }
 
+.cancel {
+  border: none;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0 3px 4px 2px rgb(0 0 0 / 40%);
+  color: #aaa;
+}
+
+.cancel:hover {
+  color: #fff;
+  background-color: #555;
+}
 
 .done {
   background-color: #18a2b8;
