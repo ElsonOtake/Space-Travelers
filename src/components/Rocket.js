@@ -25,9 +25,16 @@ const Rocket = (props) => {
       <div className="dataContainer">
         <p className="name">{ name }</p>
         <p className="details">
+        {reserved && (
+            <span
+              className="done"
+            >
+              Reserved
+            </span>
+          )}
           { description }
         </p>
-        
+        {!reserved && (
           <button
             className="reserve"
             onClick={reserve}
@@ -35,6 +42,16 @@ const Rocket = (props) => {
           >
             Reserve Rocket
           </button>
+        )}
+        {reserved && (
+          <button
+            className="cancel"
+            onClick={reserve}
+            type="button"
+          >
+            Cancel Reservation
+          </button>
+        )}
       </div>
     </div>
   );
