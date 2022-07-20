@@ -60,7 +60,7 @@ const Missions = () => {
                         </small>
                       </td>
                       <td className="align-middle">
-                        <div className="d-flex justify-content-center flex-wrap">
+                        <div className="d-flex justify-content-center">
                           {!mission.reserved && ( 
                             <Badge bg="secondary">
                               <small>NOT A MEMBER</small>
@@ -74,7 +74,7 @@ const Missions = () => {
                         </div>
                       </td>
                       <td className="align-middle">
-                        <div className="d-flex justify-content-center flex-wrap">
+                        <div className="d-flex justify-content-center">
                           {!mission.reserved && ( 
                             <Button variant="outline-secondary" className={`btn-${mission.id}`}
                               onClick={
