@@ -20,7 +20,7 @@ const missions = [{
   wikipedia: "https://en.wikipedia.org/wiki/Telesat",
 }];
 
-describe('true is truthy and false is falsy', () => {
+describe('Test the filterMissions function', () => {
 
   test('Size of input array', () => {
     expect(missions.length).toBe(2);
