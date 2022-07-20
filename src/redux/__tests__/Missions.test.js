@@ -1,7 +1,6 @@
 import { joinMission, leaveMission } from '../missions/Missions';
 
 describe('Test the action functions joinMission and leaveMission', () => {
-
   test('joinMission call with id = 1', () => {
     expect(joinMission(1).id).toBe(1);
     expect(joinMission(1).type).not.toBe('JOIN_MISSION');
@@ -13,5 +12,4 @@ describe('Test the action functions joinMission and leaveMission', () => {
     expect(leaveMission(2).type).not.toBe('LEAVE_MISSION');
     expect(leaveMission(2).type).toBe('space-travelers/missions/LEAVE_MISSION');
   });
-
 });

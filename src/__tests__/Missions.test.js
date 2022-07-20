@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Missions from '../components/Missions';
 import { Provider } from 'react-redux';
+import Missions from '../components/Missions';
 import store from '../redux/configureStore';
 
 describe('Tests for the Missions component', () => {
@@ -12,7 +12,6 @@ describe('Tests for the Missions component', () => {
     </Provider>,
   );
   test('Check for the following test on screen', () => {
-    
     expect(screen.getByText('Mission')).toBeInTheDocument();
     expect(screen.getByText('Description')).toBeInTheDocument();
     expect(screen.getByText('Status')).toBeInTheDocument();
@@ -27,8 +26,7 @@ describe('Tests for the Missions component', () => {
     expect(screen.getByRole('table')).not.toHaveClass('hover');
 
     expect(screen.getAllByRole('columnheader').length).toBe(4);
-
-});
+  });
   test('Check for the snapshot', () => {
     expect(screen.debug()).toMatchSnapshot();
   });

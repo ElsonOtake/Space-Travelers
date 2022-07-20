@@ -8,10 +8,9 @@ describe('Tests for the Header component', () => {
   render(
     <Router>
       <Header />
-    </Router>
+    </Router>,
   );
   test('Checks for the following tests on screen', () => {
-
     expect(screen.getByText(/Space Travelers/)).toBeTruthy();
     expect(screen.getByText(/Hub/)).toBeTruthy();
     expect(screen.getByText("Space Travelers' Hub")).toBeTruthy();
@@ -22,11 +21,10 @@ describe('Tests for the Header component', () => {
     expect(screen.getByRole('img')).toBeInTheDocument();
     expect(screen.getByRole('heading')).toBeInTheDocument();
     expect(screen.getByRole('list')).toBeInTheDocument();
-    
+
     expect(screen.getAllByRole('link').length).toBe(3);
 
     expect(screen.getByAltText('planet logo')).toBeTruthy();
-
   });
   test('Checks for the Snapshot', () => {
     expect(screen.debug()).toMatchSnapshot();
