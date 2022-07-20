@@ -16,19 +16,21 @@ const Rockets = () => {
     }
   }, [data.length, dispatch]);
 
+  const createRocket = (data) => <Rocket
+        id={data.id}
+        name={data.name}
+        description={data.description}
+        image={data.image}
+        key={data.id}
+        reserved={data.reserved}
+      />
+
   // Map the rockets array to return a Rocket component
   // Send values as props
   return (
     <>
     <p>working</p>
-      {data.map((i) => <Rocket 
-        id={i.id}
-        name={i.name}
-        description={i.description}
-        image={i.image}
-        key={i.id}
-        />
-      )}
+      {data.map((i) => createRocket(i) )}
     </>
   )
 
