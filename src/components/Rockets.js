@@ -2,6 +2,7 @@ import  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../redux/rockets/Rockets';
 import Rocket from './Rocket';
+import '../css/rockets.css'
 
 const Rockets = () => {
   // Get rockets data from reducer
@@ -31,7 +32,6 @@ const Rockets = () => {
   
   return (
     <>
-    <p>working</p>
       {data.map((i) => createRocket(i) )}
     </>
   )
