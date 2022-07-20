@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const GET_ROCKETS = 'test/rockets/GET_ROCKETS';
+const GET_ROCKETS = 'Space-Travelers/rockets/GET_ROCKETS';
+const RESERVE = 'Space-Travelers/rockets/RESERVE'
 
 const initialState = [];
 
@@ -8,6 +9,15 @@ const rocketsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ROCKETS:
       return action.payload;
+      case RESERVE: {
+        const newState = state.map((rocket) => {
+          if (rocket.id !== action.payload) {
+            return rocket;
+          }
+          return { ...rocket, reserved: !rocket.reserved };
+        });
+        return newState;
+      }
     default:
       return state;
   }
@@ -24,6 +34,7 @@ const getList = () => async (dispatch) => {
       id: info.id,
       description: info.description,
       image: info.flickr_images,
+      reserved: false,
     };
     return details;
   });
@@ -33,5 +44,10 @@ const getList = () => async (dispatch) => {
   });
 };
 
+const reserveRocket = (id) => ({
+  type: RESERVE,
+  payload: id,
+});
+
 export default rocketsReducer;
-export { getList };
+export { getList, reserveRocket };
