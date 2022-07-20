@@ -6,6 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const MyProfile = () => {
   const missionsData = useSelector((state) => state.missionsReducer);
+  const rocketsData = useSelector((state) => state.rocketsReducer);
 
   return (
     <Container className="mt-4">
@@ -25,6 +26,16 @@ const MyProfile = () => {
         </Col>
         <Col>
           <h4>My Rockets</h4>
+          <ListGroup>
+            {
+              rocketsData.length > 0
+              && rocketsData.filter((rocket) => rocket.reserved).map((res) => (
+                <ListGroup.Item key={res.id}>
+                  {res.name}
+                </ListGroup.Item>
+              ))
+            }
+          </ListGroup>
         </Col>
       </Row>
     </Container>
