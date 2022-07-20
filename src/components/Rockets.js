@@ -1,8 +1,8 @@
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getList } from '../redux/rockets/Rockets';
 import Rocket from './Rocket';
-import '../css/rockets.css'
+import '../css/rockets.css';
 
 const Rockets = () => {
   // Get rockets data from reducer
@@ -17,25 +17,25 @@ const Rockets = () => {
     }
   }, [data.length, dispatch]);
 
-
   // Create a rocket sending values as props
-  const createRocket = (data) => <Rocket
-        id={data.id}
-        name={data.name}
-        description={data.description}
-        image={data.image}
-        key={data.id}
-        reserved={data.reserved}
-      />
+  const createRocket = (data) => (
+    <Rocket
+      id={data.id}
+      name={data.name}
+      description={data.description}
+      image={data.image}
+      key={data.id}
+      reserved={data.reserved}
+    />
+  );
 
   // Map the rockets array to return a Rocket component with the createRocket function
-  
+
   return (
     <>
-      {data.map((i) => createRocket(i) )}
+      {data.map((i) => createRocket(i))}
     </>
-  )
-
+  );
 };
 
 export default Rockets;

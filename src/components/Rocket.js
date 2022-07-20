@@ -9,9 +9,9 @@ const Rocket = (props) => {
 
   const dispatch = useDispatch();
 
-  const reserve = () =>{
-    dispatch(reserveRocket(id))
-  }
+  const reserve = () => {
+    dispatch(reserveRocket(id));
+  };
 
   return (
     <div className="ShipContainer" key={id}>
@@ -25,12 +25,12 @@ const Rocket = (props) => {
       <div className="dataContainer">
         <p className="name">{ name }</p>
         <p className="details">
-        {reserved && (
-            <span
-              className="done"
-            >
-              Reserved
-            </span>
+          {reserved && (
+          <span
+            className="done"
+          >
+            Reserved
+          </span>
           )}
           { description }
         </p>
@@ -62,6 +62,7 @@ Rocket.propTypes = {
   description: PropTypes.string.isRequired,
   image: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.number.isRequired,
+  reserved: PropTypes.bool.isRequired,
 };
 
 export default Rocket;
