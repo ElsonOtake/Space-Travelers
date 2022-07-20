@@ -16,6 +16,10 @@ describe('Tests for the MyProfile component', () => {
     expect(screen.getByText('My Missions')).toBeInTheDocument();
     expect(screen.getByText('My Rockets')).toBeInTheDocument();
 
+    expect(screen.queryByText('My Profile')).toBeNull();
+
+    expect(screen.getAllByRole('heading').length).toBe(2);
+
 });
   test('Check for the snapshot', () => {
     expect(screen.debug()).toMatchSnapshot();
