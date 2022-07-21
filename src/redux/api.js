@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const urlMissions = 'https://api.spacexdata.com/v3/missions';
 
-const filterMissions = (missions) => {
+export const filterMissions = (missions) => {
   const response = [];
   missions.forEach((mission) => {
     response.push({
