@@ -50,4 +50,4 @@ const reserveRocket = (id) => ({
 });
 
 export default rocketsReducer;
-export { getList, reserveRocket };
+export { getList, reserveRocket, GET_ROCKETS };
