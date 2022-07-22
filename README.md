@@ -19,9 +19,9 @@ The My Profile section displays all reserved rockets and space missions.
 
 ## Live Demo (if available)
 
-[Live Demo (Netlify)]()
+[Live Demo (Netlify)](https://elsonotake-space-travelers.netlify.app)
 
-[Live Demo (Heroku)]()
+[Live Demo (Heroku)](https://elsonotake-space-travelers.herokuapp.com/)
 
 
 ## Getting Started
