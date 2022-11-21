@@ -1,65 +1,129 @@
-# Space-Travelers
+<a name="readme-top"></a>
 
->"Space-Travelers" is a web application for a company that provides commercial and scientific space travel services. The application allow users to book rockets and join selected space missions working with the real live data from the SpaceX API.
+<!-- TABLE OF CONTENTS -->
+
+# 📗 Table of Contents
+
+- [📖 About the Project](#about-project)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+    - [Key Features](#key-features)
+  - [🚀 Live Demo](#live-demo)
+- [💻 Getting Started](#getting-started)
+  - [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Run tests](#run-tests)
+- [👥 Authors](#authors)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [⭐️ Show your support](#support)
+- [🙏 Acknowledgements](#acknowledgements)
+- [❓ FAQ](#faq)
+- [📝 License](#license)
+
+<!-- PROJECT DESCRIPTION -->
+
+# 📖 [Space Travelers' Hub] <a name="about-project"></a>
+
+**[Space Travelers' Hub]** is a web application for a company that provides commercial and scientific space travel services. The application allow users to book rockets and join selected space missions working with the real live data from the SpaceX API.
 The Space Travelers' Hub consists of Rockets, Missions, and the My Profile section.
 The Rockets section displays a list of all available SpaceX rockets. Users can book each rocket by clicking the reservation button or cancel the previously made booking.
 The Missions section displays a list of current missions along with their brief description and participation status. There is also a button next to each mission that allows users to join the selected mission or leave the mission the user joined earlier.
 The My Profile section displays all reserved rockets and space missions.
 
+## 🛠 Built With <a name="built-with"></a>
 
-## Built With
+### Tech Stack <a name="tech-stack"></a>
 
-- HTML
-- JavaScript
-- CSS
-- Git
-- React
-- Redux
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://redux.js.org/">Redux</a></li>
+  </ul>
+</details>
 
+<!-- Features -->
 
-## Live Demo (if available)
+### Key Features <a name="key-features"></a>
 
-[Live Demo (Netlify)](https://elsonotake-space-travelers.netlify.app)
+- **[SpaceX API](https://docs.spacexdata.com/)**
 
-[Live Demo (Heroku)](https://elsonotake-space-travelers.herokuapp.com/)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LIVE DEMO -->
 
-## Getting Started
+## 🚀 Live Demo <a name="live-demo"></a>
 
-To get a local copy, follow these simple steps.
+- [Live Demo Link](https://elsonotake-space-travelers.netlify.app)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-Web browser installed
+In order to run this project you need:
+
+<a href="https://nodejs.org/">Node.js</a>
 
 ### Setup
 
-Cloning a repository
+Clone this repository to your desired folder:
 
-- On GitHub.com, navigate to the main page of the repository;
+using HTTPS:
+```sh
+  git clone https://github.com/ElsonOtake/Space-Travelers.git
+  cd Space-Travelers
+```
 
-- Above the list of files, click "Code" button;
+using an SSH key:
+```sh
+  git clone git@github.com:ElsonOtake/Space-Travelers.git
+  cd Space-Travelers
+```
 
-- Copy the URL to clone the repository. 
+using GitHub CLI:
+```sh
+  git clone gh repo clone ElsonOtake/Space-Travelers
+  cd Space-Travelers
+```
 
-  - To clone the repository using HTTPS : `https://github.com/ElsonOtake/Space-Travelers.git`
+### Install
 
-  - To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority : `git@github.com:ElsonOtake/Space-Travelers.git`
+Install this project with:
 
-  - To clone a repository using GitHub CLI : `gh repo clone ElsonOtake/Space-Travelers`
+```sh
+  npm install
+```
 
-- Open Terminal;
+### Usage
 
-- Change the current working directory to the location where you want the cloned directory;
+To run the project, execute the following command:
 
-- Type `git clone`, and then paste the URL you copied earlier;
+```sh
+  npm start
+```
 
-- run `npm install` to install all dependencies;
+### Run tests
 
-- run `npm start` to start the application locally.
+To run tests, run the following command:
 
+```sh
+  npm test
+```
 
-## Authors
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Authors <a name="authors"></a>
 
 👤 **Walter Velasquez**
 
@@ -73,27 +137,51 @@ Cloning a repository
 - Twitter: [@elsonotake](https://twitter.com/elsonotake)
 - LinkedIn: [elsonotake](https://linkedin.com/in/elsonotake)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🤝 Contributing
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- [ ] **[Update SpaceX API to V4]**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](../../issues/).
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Show your support
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
 
 Give a ⭐️ if you like this project!
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Acknowledgments
+<!-- ACKNOWLEDGEMENTS -->
 
-- Microverse
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to thank:
+
+- [Microverse](https://www.microverse.org/)
 - [Freepik](https://www.flaticon.com/free-icons/planet)
-- W3Schools
-- Stack Overflow
+- [W3Schools](https://www.w3schools.com/)
+- [Stack Overflow](https://stackoverflow.com/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📝 License
+<!-- LICENSE -->
 
-This project is [MIT](./MIT.md) licensed.
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./MIT) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
