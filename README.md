@@ -142,7 +142,7 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Update SpaceX API to V4]**
+- [ ] **Update SpaceX API to V4**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
