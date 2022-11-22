@@ -41,6 +41,7 @@ The My Profile section displays all reserved rockets and space missions.
   <ul>
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://redux.js.org/">Redux</a></li>
+    <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
 </details>
 
