@@ -1,9 +1,17 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 
+// Check if build directory exists
+const buildPath = path.join(__dirname, 'build');
+if (!fs.existsSync(buildPath)) {
+  console.error('Build directory does not exist. Please run "npm run build" first.');
+  console.error('Expected path:', buildPath);
+}
+
 // Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(buildPath));
 
 // Security headers middleware
 app.use((req, res, next) => {
@@ -18,7 +26,12 @@ app.use((req, res, next) => {
 
 // Catch all handler: send back React's index.html file for any non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  const indexPath = path.join(__dirname, 'build', 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(500).send('Build directory or index.html not found. The app may not have been built correctly.');
+  }
 });
 
 // Use the PORT environment variable or default to 3000
