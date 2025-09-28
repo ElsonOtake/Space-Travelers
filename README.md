@@ -57,7 +57,8 @@ The My Profile section displays all reserved rockets and space missions.
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://elsonotake-space-travelers.netlify.app)
+- [Netlify](https://elsonotake-space-travelers.netlify.app)
+- [Vercel](https://space-travelers-e4c10xbk4-elsonotakes-projects.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
