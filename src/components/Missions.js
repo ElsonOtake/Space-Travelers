@@ -38,7 +38,7 @@ const Missions = () => {
                 <th className="col-sm-1 fw-bold">Mission</th>
                 <th className="col-sm-6 fw-bold">Description</th>
                 <th className="col-sm-1 fw-bold">Status</th>
-                <th className="col-sm-1"> </th>
+                <th className="col-sm-1" aria-label="Action"> </th>
               </tr>
             </thead>
             <tbody>
