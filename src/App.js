@@ -11,7 +11,7 @@ import MyProfile from './components/MyProfile';
 
 const App = () => (
   <React.StrictMode>
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Header />
       <Routes>
         <Route path="/" element={<Rockets />} />

@@ -6,7 +6,7 @@ import Header from '../components/Header';
 
 describe('Tests for the Header component', () => {
   render(
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Header />
     </Router>,
   );

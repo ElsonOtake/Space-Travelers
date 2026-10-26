@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const CrewPhoto = ({ name, image }) => {
+const CrewPhoto = ({ name, image = null }) => {
   const [failed, setFailed] = useState(false);
 
   return image && !failed ? (
@@ -23,7 +23,5 @@ CrewPhoto.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string,
 };
-
-CrewPhoto.defaultProps = { image: null };
 
 export default CrewPhoto;
