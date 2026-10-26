@@ -1,0 +1,29 @@
+.eslintrc.json
+  s_893b3436fc377f::t_2a801cd92253ec 41
+package.json
+  s_893b3436fc377f::t_2a801cd92253ec 6,10-16
+README.md
+  s_893b3436fc377f::t_2a801cd92253ec 46,48
+src/components/Rocket.jsx
+  s_893b3436fc377f::t_2a801cd92253ec 4
+src/components/CrewPhoto.jsx
+  s_893b3436fc377f::t_2a801cd92253ec 3
+package-lock.json
+  s_893b3436fc377f::t_0fefc9b742a308 11,15-21,933-959,1112-1114,1117-1118,1123-1132,1138-1140,1143-1148,1151-1152,1164-1166,1495-1506,1508-1510,1671,1689-1691,1695-1697,1839-1850,2424-2432,4366-4368,6254-6256,6262-6282,6315-6317,6320,6323,6340-6342,6345-6346,6349-6351,6363-6365,6368,6378-6380,6383-6384,6394-6410,6442-6445,6457-6459,6462,6533-6535,6750-6753,8132-8134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7d4a303373416ad6494a68af08279eb280db559a",
+  "prompts": {},
+  "sessions": {
+    "s_893b3436fc377f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17805-652d-7333-9c54-03eadc60d9bb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Elson Otake <elsonotake@yahoo.com.br>"
+    }
+  }
+}
