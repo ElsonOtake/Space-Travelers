@@ -1,0 +1,29 @@
+package.json
+  s_893b3436fc377f::t_cab76e971bda20 64-65
+.eslintrc.json
+  s_893b3436fc377f::t_cab76e971bda20 15-21,23-31,35-47,53
+src/App.js
+  s_893b3436fc377f::t_cab76e971bda20 14
+src/components/CrewPhoto.js
+  s_893b3436fc377f::t_cab76e971bda20 4
+src/__tests__/Header.test.js
+  s_893b3436fc377f::t_cab76e971bda20 9
+package-lock.json
+  s_893b3436fc377f::t_924e49084830d5 36-37,3794-3796,3848-3850,3854,3857,3860-3864,3866-3872,4418-4419
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4d75e2785bc07124c465c37431d9c9de1f04301f",
+  "prompts": {},
+  "sessions": {
+    "s_893b3436fc377f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17805-652d-7333-9c54-03eadc60d9bb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Elson Otake <elsonotake@yahoo.com.br>"
+    }
+  }
+}
