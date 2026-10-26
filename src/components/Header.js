@@ -16,10 +16,16 @@ const Header = () => (
         Rockets
       </NavLink>
       <NavLink
-        to="/missions"
+        to="/launches"
         className={({ isActive }) => (isActive ? 'active' : 'notActive')}
       >
-        Missions
+        Launches
+      </NavLink>
+      <NavLink
+        to="/crew"
+        className={({ isActive }) => (isActive ? 'active' : 'notActive')}
+      >
+        Crew
       </NavLink>
       <NavLink
         to="/my_profile"

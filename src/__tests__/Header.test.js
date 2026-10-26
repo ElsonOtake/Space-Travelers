@@ -15,14 +15,15 @@ describe('Tests for the Header component', () => {
     expect(screen.getByText(/Hub/)).toBeTruthy();
     expect(screen.getByText("Space Travelers' Hub")).toBeTruthy();
     expect(screen.getByText('Rockets')).toBeTruthy();
-    expect(screen.getByText('Missions')).toBeTruthy();
+    expect(screen.getByText('Launches')).toBeTruthy();
+    expect(screen.getByText('Crew')).toBeTruthy();
     expect(screen.getByText('My Profile')).toBeTruthy();
 
     expect(screen.getByRole('img')).toBeInTheDocument();
     expect(screen.getByRole('heading')).toBeInTheDocument();
     expect(screen.getByRole('list')).toBeInTheDocument();
 
-    expect(screen.getAllByRole('link').length).toBe(3);
+    expect(screen.getAllByRole('link').length).toBe(4);
 
     expect(screen.getByAltText('planet logo')).toBeTruthy();
   });

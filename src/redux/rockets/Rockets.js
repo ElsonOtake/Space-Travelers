@@ -1,53 +1,34 @@
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { axiosGetRockets } from '../api';
 
-const GET_ROCKETS = 'Space-Travelers/rockets/GET_ROCKETS';
-const RESERVE = 'Space-Travelers/rockets/RESERVE';
-
-const initialState = [];
-
-const rocketsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_ROCKETS:
-      return action.payload;
-    case RESERVE: {
-      const newState = state.map((rocket) => {
-        if (rocket.id !== action.payload) {
-          return rocket;
-        }
-        return { ...rocket, reserved: !rocket.reserved };
-      });
-      return newState;
-    }
-    default:
-      return state;
-  }
-};
-
-// Consume API and get rockets data
-// Create an array with specific information gotted from the API
-// Dispatch the new array to the rockets reducer
-const getList = () => async (dispatch) => {
-  const response = await axios.get('https://api.spacexdata.com/v3/rockets');
-  const newArray = response.data.map((info) => {
-    const details = {
-      name: info.rocket_name,
-      id: info.id,
-      description: info.description,
-      image: info.flickr_images,
-      reserved: false,
-    };
-    return details;
-  });
-  dispatch({
-    type: GET_ROCKETS,
-    payload: newArray,
-  });
-};
-
-const reserveRocket = (id) => ({
-  type: RESERVE,
-  payload: id,
+export const getList = createAsyncThunk('rockets/fetch', axiosGetRockets, {
+  condition: (_, { getState }) => {
+    const { status } = getState().rocketsReducer;
+    return status === 'idle' || status === 'failed';
+  },
 });
 
-export default rocketsReducer;
-export { getList, reserveRocket, GET_ROCKETS };
+const rocketsSlice = createSlice({
+  name: 'rockets',
+  initialState: { items: [], status: 'idle', error: null },
+  reducers: {
+    reserveRocket: (state, action) => ({
+      ...state,
+      items: state.items.map((rocket) => (rocket.id === action.payload
+        ? { ...rocket, reserved: !rocket.reserved } : rocket)),
+    }),
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getList.pending, (state) => ({ ...state, status: 'loading', error: null }))
+      .addCase(getList.fulfilled, (state, action) => ({
+        ...state, items: action.payload, status: 'succeeded',
+      }))
+      .addCase(getList.rejected, (state) => ({
+        ...state, status: 'failed', error: 'Unable to load rockets. Please try again.',
+      }));
+  },
+});
+
+export const { reserveRocket } = rocketsSlice.actions;
+export default rocketsSlice.reducer;

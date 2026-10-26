@@ -1,61 +1,78 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
-import Rocket from '../components/Rocket';
-import store from '../redux/configureStore';
-import { GET_ROCKETS } from '../redux/rockets/Rockets';
+import { configureStore } from '@reduxjs/toolkit';
+import axios from 'axios';
+import App from '../App';
+import crew from '../redux/crew/Crew';
+import launches from '../redux/launches/Launches';
+import rocketsReducer from '../redux/rockets/Rockets';
+import { ROCKETS_URL } from '../redux/api';
 
-const rocket = [
-  {
-    name: 'Lothar',
-    id: 1,
-    description: 'rocket description',
-    image: [
-      'https://imgur.com/DaCfMsj.jpg',
-      'https://imgur.com/azYafd8.jpg',
-    ],
-    reserved: false,
-  },
-];
+jest.mock('axios');
 
-const RocketMuck = () => {
-  const rocketList = store.getState().rocketsReducer;
-
-  render(
-    <Provider store={store}>
-      <div>
-        {rocketList.map((data) => (
-          <Rocket
-            id={data.id}
-            name={data.name}
-            description={data.description}
-            image={data.image}
-            key={data.id}
-            reserved={data.reserved}
-          />
-        ))}
-      </div>
-    </Provider>,
-  );
+const rocket = {
+  name: 'Falcon 9 Block 5',
+  description: 'A reusable two-stage rocket.',
+  family: 'Falcon',
+  reusable: true,
 };
 
-describe('Rocket tests', () => {
-  store.dispatch({ type: GET_ROCKETS, payload: rocket });
-  test('Check rendering and mucked data usage', () => {
-    RocketMuck();
+const renderApp = () => {
+  window.history.replaceState({}, '', '/');
+  const store = configureStore({ reducer: { crew, launches, rocketsReducer } });
+  render(<Provider store={store}><App /></Provider>);
+  return store;
+};
 
-    expect(screen.getByText(/Lothar/i)).toBeInTheDocument();
-    expect(screen.getByText(/rocket description/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reserve Rocket/i)).toBeInTheDocument();
-  });
+beforeEach(() => {
+  jest.clearAllMocks();
+  axios.get.mockResolvedValue({ data: [rocket] });
+});
 
-  test('Check resevation', () => {
-    RocketMuck();
-    const reserveBtn = screen.getByText(/Reserve Rocket/i);
+test('loads Pipeworx rockets once in StrictMode and preserves reservations across navigation', async () => {
+  renderApp();
+  expect(screen.getByRole('status')).toHaveTextContent('Loading rockets');
+  expect(await screen.findByText(rocket.name)).toBeInTheDocument();
+  expect(screen.getByText(rocket.description)).toBeInTheDocument();
+  expect(axios.get).toHaveBeenCalledTimes(1);
+  expect(axios.get).toHaveBeenCalledWith(ROCKETS_URL);
+  fireEvent.click(screen.getByRole('button', { name: 'Reserve Rocket' }));
+  expect(screen.getByText('Reserved')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('link', { name: 'My Profile' }));
+  expect(screen.getByText(rocket.name)).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('link', { name: 'Rockets' }));
+  fireEvent.click(screen.getByRole('button', { name: 'Cancel Reservation' }));
+  expect(screen.queryByText('Reserved')).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('link', { name: 'My Profile' }));
+  expect(screen.queryByText(rocket.name)).not.toBeInTheDocument();
+  expect(axios.get).toHaveBeenCalledTimes(1);
+});
 
-    fireEvent.click(reserveBtn);
-    RocketMuck();
-    expect(screen.getByText(/Reserved/i)).toBeInTheDocument();
-  });
+test('handles a network rejection and retries without an unhandled promise or duplicate request', async () => {
+  axios.get.mockRejectedValueOnce(new Error('Network Error'));
+  const store = renderApp();
+  expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load rockets');
+  expect(store.getState().rocketsReducer.status).toBe('failed');
+  expect(axios.get).toHaveBeenCalledTimes(1);
+  fireEvent.click(screen.getByRole('button', { name: 'Try again' }));
+  expect(await screen.findByText(rocket.name)).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  expect(axios.get).toHaveBeenCalledTimes(2);
+});
+
+test('treats an empty response as loaded without refetching on navigation', async () => {
+  axios.get.mockResolvedValue({ data: [] });
+  renderApp();
+  expect(await screen.findByText('No rockets available.')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('link', { name: 'My Profile' }));
+  fireEvent.click(screen.getByRole('link', { name: 'Rockets' }));
+  expect(screen.getByText('No rockets available.')).toBeInTheDocument();
+  expect(axios.get).toHaveBeenCalledTimes(1);
+});
+
+test('shows an error for a malformed API response', async () => {
+  axios.get.mockResolvedValue({ data: { error: 'unavailable' } });
+  renderApp();
+  expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load rockets');
 });

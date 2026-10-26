@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import missionsReducer, { missionsSliceReducer } from './missions/Missions';
+import crewReducer from './crew/Crew';
+import launchesReducer from './launches/Launches';
 import rocketsReducer from './rockets/Rockets';
 
 const rootReducer = combineReducers({
-  missionsReducer,
-  missionsSliceReducer,
+  crew: crewReducer,
+  launches: launchesReducer,
   rocketsReducer,
 });
 
