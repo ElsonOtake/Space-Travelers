@@ -1,0 +1,23 @@
+.gitignore
+  s_893b3436fc377f::t_1e93a660edc8a5 21-23
+.github/workflows/linters.yml
+  s_893b3436fc377f::t_82f07ab12cd6e5 3-6,14-15,17-18,20-23,25-26,29-30,32-33,35-38,40-41,44-45,47-48,50-54
+server.js
+  s_893b3436fc377f::t_72495adb0cd7b6 4,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9c0d902371a797b18bb551ff665757fa04f06acd",
+  "prompts": {},
+  "sessions": {
+    "s_893b3436fc377f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17805-652d-7333-9c54-03eadc60d9bb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Elson Otake <elsonotake@yahoo.com.br>"
+    }
+  }
+}
