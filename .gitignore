@@ -18,3 +18,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# local Netlify state
+/.netlify/
+
+# generated production assets
+/build/
+/dist/

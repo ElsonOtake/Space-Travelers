@@ -8,6 +8,7 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
+    - [API and Routes](#api-and-routes)
   - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -15,6 +16,8 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Project Structure](#project-structure)
+  - [Continuous Integration](#continuous-integration)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -26,11 +29,14 @@
 
 # 📖 Space Travelers' Hub <a name="about-project"></a>
 
-**Space Travelers' Hub** is a web application for a company that provides commercial and scientific space travel services. The application allow users to book rockets and join selected space missions working with the real live data from the SpaceX API.
-The Space Travelers' Hub consists of Rockets, Missions, and the My Profile section.
-The Rockets section displays a list of all available SpaceX rockets. Users can book each rocket by clicking the reservation button or cancel the previously made booking.
-The Missions section displays a list of current missions along with their brief description and participation status. There is also a button next to each mission that allows users to join the selected mission or leave the mission the user joined earlier.
-The My Profile section displays all reserved rockets and space missions.
+**Space Travelers' Hub** lets users browse rockets, reserve them locally, and select launches and crew members.
+
+- **Rockets:** browse rocket details and reserve or cancel a reservation. Rocket cards display names, descriptions, and reservation controls using the Pipeworx SpaceX revival API. Failed requests display a retry button.
+- **Launches:** browse upcoming and past launches from Pipeworx, including dates, status, descriptions, and webcast links when available. Add or remove launches from My Launches.
+- **Crew:** browse astronaut photos, roles, agencies, status, and assigned missions from `https://gateway.pipeworx.io/spacex/v4/crew`. Add or remove members from My Crew. Missing or failed photos display a fallback.
+- **My Profile:** view selected launches, crew members with their photos, and reserved rockets.
+
+Launches replaces the former Missions section at `/launches`; old `/missions` links redirect there. Crew has its own page at `/crew`. Selections are held in Redux memory and reset on page refresh. They do not create real bookings.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -39,8 +45,9 @@ The My Profile section displays all reserved rockets and space missions.
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://redux.js.org/">Redux</a></li>
+    <li><a href="https://react.dev/">React 19</a></li>
+    <li><a href="https://vite.dev/">Vite 8</a> and <a href="https://vitest.dev/">Vitest 5</a></li>
+    <li><a href="https://redux.js.org/">Redux Toolkit 2 and React Redux 9</a></li>
     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
 </details>
@@ -49,7 +56,27 @@ The My Profile section displays all reserved rockets and space missions.
 
 ### Key Features <a name="key-features"></a>
 
-- **[SpaceX API](https://docs.spacexdata.com/)**
+- Rocket reservations with cancellation.
+- Upcoming and past launch lists with local dates, status, and webcast links when available.
+- Crew profiles with photos, roles, agencies, and assigned missions.
+- A profile that collects selected launches, selected crew, and reserved rockets.
+- Loading, empty, and retry states for API requests.
+- Responsive layouts and a fallback for unavailable crew photos.
+
+### API and Routes <a name="api-and-routes"></a>
+
+Catalog data comes from the [Pipeworx SpaceX revival](https://pipeworx.io/blog/spacex-api-revived/). Requests use `https://gateway.pipeworx.io/spacex/v4` as their base URL.
+
+| Page | App route | API endpoints |
+| --- | --- | --- |
+| Rockets | `/` | `/rockets` |
+| Launches | `/launches` | `/launches/upcoming`, `/launches/past` |
+| Crew | `/crew` | `/crew` |
+| My Profile | `/my_profile` | Uses selections already in Redux |
+
+The API response shapes differ from the original SpaceX API. `src/redux/api.js` maps them into the app's data model. Rocket records have no photos, so rocket cards contain text and reservation controls. Historical launches may have fewer details than upcoming launches. Crew biography links are displayed only when available.
+
+Catalog pages fetch data when first visited and retain it while the app stays open. Redux tracks request status to prevent duplicate loads, including under React Strict Mode. Failed requests can be retried.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,9 +97,15 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-In order to run this project you need:
+- [Node.js](https://nodejs.org/) **22.13 or newer within Node 22** and **npm 10 or newer**, as declared in `package.json`.
+- Internet access to load catalog data and crew photos.
 
-<a href="https://nodejs.org/">Node.js</a>
+If you use nvm, select the supported Node version before installing dependencies:
+
+```sh
+nvm install 22
+nvm use 22
+```
 
 ### Setup
 
@@ -92,33 +125,88 @@ using an SSH key:
 
 using GitHub CLI:
 ```sh
-  git clone gh repo clone ElsonOtake/Space-Travelers
+  gh repo clone ElsonOtake/Space-Travelers
   cd Space-Travelers
 ```
 
 ### Install
 
-Install this project with:
+Install the exact dependency versions from the lockfile:
 
 ```sh
-  npm install
+npm ci
 ```
 
 ### Usage
 
-To run the project, execute the following command:
+Start the Vite development server with automatic reloads:
 
 ```sh
-  npm start
+npm run dev
 ```
+
+Open `http://localhost:3000`. The development server requires port 3000 to be free. To use another port:
+
+```sh
+npm run dev -- --port 3001
+```
+
+To serve a production build through Express, build the app first:
+
+```sh
+npm run build
+npm start
+```
+
+Vite writes production assets to `build/`. Generated assets are ignored by Git. `npm run preview` previews a production build locally. The Express server serves the `build` directory on port 3000 by default. Set the `PORT` environment variable to use another port. Rebuild after source changes when using `npm start`.
 
 ### Run tests
 
-To run tests, run the following command:
+Run all tests once with Vitest:
 
 ```sh
-  npm test
+npm test
 ```
+
+For watch mode:
+
+```sh
+npm run test:watch
+```
+
+Run the linters with:
+
+```sh
+npm run lint
+npm run lint:css
+```
+
+API calls are mocked in tests. Coverage includes response mapping, reservations, launch and crew selections across navigation, the `/missions` redirect, retry and empty states, duplicate request prevention, and crew photo fallback.
+
+### Project Structure
+
+| Path | Purpose |
+| --- | --- |
+| `index.html` | Vite HTML entry point |
+| `src/index.jsx` | React root and Redux provider |
+| `src/App.jsx` | Application routes and React Router future flags |
+| `src/components/` | Page and UI components using `.jsx` |
+| `src/redux/` | API mapping, Redux store, and feature slices |
+| `src/__tests__/`, `src/redux/__tests__/` | UI integration and API mapping tests |
+| `src/testSetup.js` | Testing Library matchers and cleanup |
+| `vite.config.mjs` | Vite development/build and Vitest configuration |
+| `public/` | Static files copied into the build |
+| `server.js` | Express production server |
+
+React 19 uses the automatic JSX transform. Components use JavaScript default parameters instead of function component `defaultProps`. Tests use Vitest and the updated Testing Library APIs.
+
+### Continuous Integration
+
+The [Linters workflow](.github/workflows/linters.yml) runs on pull requests and supports manual execution from GitHub Actions. Jobs use Ubuntu 24.04 and select Node from `package.json`.
+
+CI installs dependencies with `npm ci`, runs ESLint and Stylelint, checks that `node_modules` is not tracked, runs the tests, and builds production assets. Generated `build/` files stay out of Git.
+
+For production hosting instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -144,7 +232,7 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Update SpaceX API to V4**
+- [ ] **Persist profile selections across page refreshes**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

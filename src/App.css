@@ -40,3 +40,25 @@ nav img {
   width: 3rem;
   height: auto;
 }
+
+@media (width <= 900px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  nav div {
+    margin-left: 0;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-right: 0;
+  }
+
+  nav a:last-child {
+    padding-left: 1rem;
+  }
+}

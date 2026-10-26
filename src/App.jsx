@@ -1,18 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Routes, Route, Navigate,
+} from 'react-router-dom';
 import Header from './components/Header';
-import Missions from './components/Missions';
+import Crew from './components/Crew';
+import Launches from './components/Launches';
 import './App.css';
 import Rockets from './components/Rockets';
 import MyProfile from './components/MyProfile';
 
 const App = () => (
   <React.StrictMode>
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Header />
       <Routes>
         <Route path="/" element={<Rockets />} />
-        <Route path="/missions" element={<Missions />} />
+        <Route path="/launches" element={<Launches />} />
+        <Route path="/crew" element={<Crew />} />
+        <Route path="/missions" element={<Navigate to="/launches" replace />} />
         <Route path="/my_profile" element={<MyProfile />} />
       </Routes>
     </Router>
