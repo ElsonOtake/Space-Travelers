@@ -43,7 +43,8 @@ Launches replaces the former Missions section at `/launches`; old `/missions` li
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://react.dev/">React.js</a></li>
+    <li><a href="https://vite.dev/">Vite</a> and <a href="https://vitest.dev/">Vitest</a></li>
     <li><a href="https://redux.js.org/">Redux</a></li>
     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
@@ -94,7 +95,7 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) **22.x** and **npm 10 or newer**, as declared in `package.json`.
+- [Node.js](https://nodejs.org/) **22.13 or newer within Node 22** and **npm 10 or newer**, as declared in `package.json`.
 - Internet access to load catalog data and crew photos.
 
 If you use nvm, select the supported Node version before installing dependencies:
@@ -136,7 +137,7 @@ Install this project with:
 
 ### Usage
 
-Start the development server with automatic reloads:
+Start the Vite development server with automatic reloads:
 
 ```sh
 npm run dev
@@ -151,20 +152,27 @@ npm run build
 npm start
 ```
 
-The Express server serves the `build` directory on port 3000 by default. Set the `PORT` environment variable to use another port. Rebuild after source changes when using `npm start`.
+Vite writes production assets to `build/`. Generated assets are ignored by Git. `npm run preview` previews a production build locally. The Express server serves the `build` directory on port 3000 by default. Set the `PORT` environment variable to use another port. Rebuild after source changes when using `npm start`.
 
 ### Run tests
 
-To run tests, run the following command:
+Run all tests once with Vitest:
 
 ```sh
 npm test
 ```
 
-For a single test run:
+For watch mode:
 
 ```sh
-CI=true npm test -- --watchAll=false --runInBand
+npm run test:watch
+```
+
+Run the linters with:
+
+```sh
+npm run lint
+npm run lint:css
 ```
 
 API calls are mocked in tests. Coverage includes response mapping, reservations, launch and crew selections across navigation, the `/missions` redirect, retry and empty states, duplicate request prevention, and crew photo fallback.

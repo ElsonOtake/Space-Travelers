@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
       - name: ESLint Report
-        run: npx --no-install eslint .
+        run: npm run lint
 
   stylelint:
     name: Stylelint
@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
       - name: Stylelint Report
-        run: npx --no-install stylelint "**/*.{css,scss}"
+        run: npm run lint:css
 
   nodechecker:
     name: node_modules checker
@@ -52,3 +52,20 @@ jobs:
             echo "::error::node_modules files are tracked. Remove them from Git and add node_modules to .gitignore."
             exit 1
           fi
+
+  test-build:
+    name: Tests and build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: package.json
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run tests
+        run: npm test
+      - name: Build production assets
+        run: npm run build

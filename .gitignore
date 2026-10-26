@@ -21,3 +21,7 @@ yarn-error.log*
 
 # local Netlify state
 /.netlify/
+
+# generated production assets
+/build/
+/dist/

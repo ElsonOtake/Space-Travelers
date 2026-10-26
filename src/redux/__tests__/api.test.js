@@ -1,12 +1,15 @@
+import {
+  beforeEach, expect, test, vi,
+} from 'vitest';
 import axios from 'axios';
 import axiosGetCrew, {
   CREW_URL, UPCOMING_LAUNCHES_URL, PAST_LAUNCHES_URL, axiosGetLaunches,
   filterCrew, filterLaunches, filterRockets, axiosGetRockets, ROCKETS_URL,
 } from '../api';
 
-jest.mock('axios');
+vi.mock('axios', () => ({ default: { get: vi.fn() } }));
 
-beforeEach(() => jest.clearAllMocks());
+beforeEach(() => vi.clearAllMocks());
 
 test('crew mapping preserves photos and nullable biography links with stable IDs', () => {
   const member = {

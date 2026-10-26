@@ -1,147 +1,57 @@
-# Space Travelers' Hub - Heroku Deployment Guide
+# Space Travelers' Hub deployment
 
-This guide will help you deploy the Space Travelers' Hub React application to Heroku using Express server instead of the deprecated create-react-app-buildpack.
+The app uses Vite to build a client-side React application. Express serves the generated files and falls back to `index.html` for client-side routes.
 
-## Prerequisites
+## Requirements
 
-- Node.js 18.x
-- npm 9.x
-- Heroku CLI installed
-- Git repository
+- Node.js 22.13 or newer within Node 22, matching `package.json`.
+- npm 10 or newer.
+- Development dependencies available during the build (Vite is a development dependency).
 
-## Deployment Setup
+## Local development
 
-### 1. Files Added for Heroku Deployment
-
-The following files have been added/modified to support Heroku deployment:
-
-- **server.js**: Express server to serve the React build
-- **static.json**: Configuration for Heroku's static buildpack (alternative option)
-- **package.json**: Updated with Express dependency and Heroku scripts
-
-### 2. Package.json Changes
-
-The following changes were made to package.json:
-
-- Added `express` dependency for serving the React app
-- Modified `start` script to run the Express server (`node server.js`)
-- Added `dev` script for local development (`react-scripts start`)
-- Added `heroku-postbuild` script to build the React app after deployment
-
-### 3. Express Server Configuration
-
-The `server.js` file:
-
-- Serves static files from the `build` directory
-- Handles client-side routing by serving `index.html` for all routes
-- Includes basic security headers
-- Uses the PORT environment variable provided by Heroku
-
-## Deployment Steps
-
-### Option 1: Using Express Server (Recommended)
-
-1. **Login to Heroku**
-   ```bash
-   heroku login
-   ```
-
-2. **Create a Heroku App**
-   ```bash
-   heroku create your-app-name
-   ```
-
-3. **Set Buildpack to Node.js**
-   ```bash
-   heroku buildpacks:set heroku/nodejs
-   ```
-
-4. **Deploy the Application**
-   ```bash
-   git add .
-   git commit -m "Add Heroku deployment configuration"
-   git push heroku main
-   ```
-
-### Option 2: Using Static Buildpack (Alternative)
-
-If you prefer to use Heroku's static buildpack:
-
-1. **Set Buildpack to Static**
-   ```bash
-   heroku buildpacks:set https://github.com/heroku/heroku-buildpack-static
-   ```
-
-2. **Deploy the Application**
-   ```bash
-   git add .
-   git commit -m "Add static buildpack configuration"
-   git push heroku main
-   ```
-
-## Local Development
-
-For local development, use the `dev` script instead of `start`:
-
-```bash
+```sh
+npm ci
 npm run dev
 ```
 
-This will run the React development server with hot reloading.
+Vite serves the app at `http://localhost:3000` with hot reloading.
 
-## Environment Variables
+## Production build and server
 
-If your application uses environment variables, set them in Heroku:
-
-```bash
-heroku config:set REACT_APP_API_URL=your-api-url
+```sh
+npm ci
+npm run build
+npm start
 ```
 
-## Viewing Your Application
+The build goes into `build/`. This generated directory is ignored by Git and must be created during deployment. The Express server reads `PORT`, defaulting to 3000. Deep links such as `/launches`, `/crew`, and `/my_profile` serve the application entry point.
 
-After deployment, open your application:
+For a local preview of the production assets:
 
-```bash
-heroku open
+```sh
+npm run preview
 ```
 
-## Troubleshooting
+## Heroku
 
-### Common Issues
+Use the Node.js buildpack (`heroku/nodejs`). The existing `heroku-postbuild` script runs `npm run build`, and `Procfile` starts `node server.js`. Ensure development dependencies are installed for the build before any production pruning.
 
-1. **Build Failures**
-   - Check that all dependencies are in `dependencies` (not `devDependencies`)
-   - Ensure Node.js and npm versions match those specified in `engines`
+## Static hosting
 
-2. **App Not Loading**
-   - Check Heroku logs: `heroku logs --tail`
-   - Verify the `start` script is correctly configured
+Configure the build command as `npm run build` and the publish directory as `build`. Rewrite application routes to `/index.html` so direct links work with React Router. Public files such as the favicon are copied from `public/`; Vite's generated bundles live under `build/assets/`.
 
-3. **Routing Issues**
-   - The Express server handles client-side routing automatically
-   - All routes will serve the React app's `index.html`
+## Client environment variables
 
-### Useful Commands
+Vite exposes variables prefixed with `VITE_` through `import.meta.env` at build time. The current catalog base URL is defined in `src/redux/api.js`; setting an environment variable does not override it automatically.
 
-- View logs: `heroku logs --tail`
-- Restart app: `heroku restart`
-- Check app info: `heroku info`
-- Open app in browser: `heroku open`
+## Verification
 
-## Migration from create-react-app-buildpack
+```sh
+npm test
+npm run lint
+npm run lint:css
+npm run build
+```
 
-This setup replaces the deprecated `create-react-app-buildpack` with a standard Node.js buildpack and Express server. The key advantages:
-
-- **Future-proof**: Uses actively maintained buildpacks
-- **Flexible**: Easy to add API routes or middleware
-- **Standard**: Follows common Node.js deployment patterns
-- **Reliable**: Better error handling and logging
-
-## Additional Notes
-
-- The Express server includes basic security headers
-- Static assets are cached appropriately
-- The app supports client-side routing for React Router
-- HTTPS is enforced in production (via static.json configuration)
-
-For any issues or questions, refer to the Heroku documentation or check the application logs.
+GitHub Actions runs these checks on pull requests. Tests mock catalog requests; loading live catalog data still requires access to Pipeworx.

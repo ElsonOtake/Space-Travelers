@@ -1,15 +1,17 @@
+import {
+  beforeEach, describe, expect, test,
+} from 'vitest';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import Header from '../components/Header';
 
 describe('Tests for the Header component', () => {
-  render(
+  beforeEach(() => render(
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Header />
     </Router>,
-  );
+  ));
   test('Checks for the following tests on screen', () => {
     expect(screen.getByText(/Space Travelers/)).toBeTruthy();
     expect(screen.getByText(/Hub/)).toBeTruthy();
@@ -26,8 +28,5 @@ describe('Tests for the Header component', () => {
     expect(screen.getAllByRole('link').length).toBe(4);
 
     expect(screen.getByAltText('planet logo')).toBeTruthy();
-  });
-  test('Checks for the Snapshot', () => {
-    expect(screen.debug()).toMatchSnapshot();
   });
 });

@@ -1,7 +1,9 @@
 import {
+  beforeEach, expect, test, vi,
+} from 'vitest';
+import {
   render, screen, fireEvent, waitFor,
 } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -11,7 +13,7 @@ import launches from '../redux/launches/Launches';
 import rocketsReducer from '../redux/rockets/Rockets';
 import { CREW_URL, UPCOMING_LAUNCHES_URL, PAST_LAUNCHES_URL } from '../redux/api';
 
-jest.mock('axios');
+vi.mock('axios', () => ({ default: { get: vi.fn() } }));
 
 const member = {
   name: 'Jessica Watkins',
@@ -39,7 +41,7 @@ const renderApp = (path) => {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   axios.get.mockImplementation((url) => {
     const data = {
       [CREW_URL]: [member], [UPCOMING_LAUNCHES_URL]: [upcoming], [PAST_LAUNCHES_URL]: [past],

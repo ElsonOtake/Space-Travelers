@@ -1,5 +1,7 @@
+import {
+  beforeEach, expect, test, vi,
+} from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -9,7 +11,7 @@ import launches from '../redux/launches/Launches';
 import rocketsReducer from '../redux/rockets/Rockets';
 import { ROCKETS_URL } from '../redux/api';
 
-jest.mock('axios');
+vi.mock('axios', () => ({ default: { get: vi.fn() } }));
 
 const rocket = {
   name: 'Falcon 9 Block 5',
@@ -26,7 +28,7 @@ const renderApp = () => {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   axios.get.mockResolvedValue({ data: [rocket] });
 });
 
