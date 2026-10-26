@@ -16,6 +16,8 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Project Structure](#project-structure)
+  - [Continuous Integration](#continuous-integration)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -44,7 +46,7 @@ Launches replaces the former Missions section at `/launches`; old `/missions` li
   <summary>Client</summary>
   <ul>
     <li><a href="https://react.dev/">React 19</a></li>
-    <li><a href="https://vite.dev/">Vite</a> and <a href="https://vitest.dev/">Vitest</a></li>
+    <li><a href="https://vite.dev/">Vite 8</a> and <a href="https://vitest.dev/">Vitest 5</a></li>
     <li><a href="https://redux.js.org/">Redux Toolkit 2 and React Redux 9</a></li>
     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
@@ -129,10 +131,10 @@ using GitHub CLI:
 
 ### Install
 
-Install this project with:
+Install the exact dependency versions from the lockfile:
 
 ```sh
-  npm install
+npm ci
 ```
 
 ### Usage
@@ -143,7 +145,11 @@ Start the Vite development server with automatic reloads:
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`. The development server requires port 3000 to be free. To use another port:
+
+```sh
+npm run dev -- --port 3001
+```
 
 To serve a production build through Express, build the app first:
 
@@ -176,6 +182,31 @@ npm run lint:css
 ```
 
 API calls are mocked in tests. Coverage includes response mapping, reservations, launch and crew selections across navigation, the `/missions` redirect, retry and empty states, duplicate request prevention, and crew photo fallback.
+
+### Project Structure
+
+| Path | Purpose |
+| --- | --- |
+| `index.html` | Vite HTML entry point |
+| `src/index.jsx` | React root and Redux provider |
+| `src/App.jsx` | Application routes and React Router future flags |
+| `src/components/` | Page and UI components using `.jsx` |
+| `src/redux/` | API mapping, Redux store, and feature slices |
+| `src/__tests__/`, `src/redux/__tests__/` | UI integration and API mapping tests |
+| `src/testSetup.js` | Testing Library matchers and cleanup |
+| `vite.config.mjs` | Vite development/build and Vitest configuration |
+| `public/` | Static files copied into the build |
+| `server.js` | Express production server |
+
+React 19 uses the automatic JSX transform. Components use JavaScript default parameters instead of function component `defaultProps`. Tests use Vitest and the updated Testing Library APIs.
+
+### Continuous Integration
+
+The [Linters workflow](.github/workflows/linters.yml) runs on pull requests and supports manual execution from GitHub Actions. Jobs use Ubuntu 24.04 and select Node from `package.json`.
+
+CI installs dependencies with `npm ci`, runs ESLint and Stylelint, checks that `node_modules` is not tracked, runs the tests, and builds production assets. Generated `build/` files stay out of Git.
+
+For production hosting instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
