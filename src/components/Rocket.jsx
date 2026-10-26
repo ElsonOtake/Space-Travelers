@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { reserveRocket } from '../redux/rockets/Rockets';
 
+/** @param {{ id: string, name: string, description: string, reserved: boolean }} props */
 const Rocket = (props) => {
   const {
     id, name, description, reserved,
@@ -48,13 +48,6 @@ const Rocket = (props) => {
       </div>
     </div>
   );
-};
-
-Rocket.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  reserved: PropTypes.bool.isRequired,
 };
 
 export default Rocket;

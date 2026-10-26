@@ -38,12 +38,7 @@
       }
     ],
     "react/jsx-props-no-spreading": "off",
-    "react/require-default-props": [
-      "error",
-      {
-        "functions": "defaultArguments"
-      }
-    ]
+    "react/prop-types": "off"
   },
   "ignorePatterns": [
     "dist/",

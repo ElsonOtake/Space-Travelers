@@ -43,9 +43,9 @@ Launches replaces the former Missions section at `/launches`; old `/missions` li
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://react.dev/">React.js</a></li>
+    <li><a href="https://react.dev/">React 19</a></li>
     <li><a href="https://vite.dev/">Vite</a> and <a href="https://vitest.dev/">Vitest</a></li>
-    <li><a href="https://redux.js.org/">Redux</a></li>
+    <li><a href="https://redux.js.org/">Redux Toolkit 2 and React Redux 9</a></li>
     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
 </details>

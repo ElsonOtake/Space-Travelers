@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
+/** @param {{ name: string, image?: string | null }} props */
 const CrewPhoto = ({ name, image = null }) => {
   const [failed, setFailed] = useState(false);
 
@@ -17,11 +17,6 @@ const CrewPhoto = ({ name, image = null }) => {
       Photo unavailable
     </div>
   );
-};
-
-CrewPhoto.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string,
 };
 
 export default CrewPhoto;
